@@ -467,7 +467,7 @@ subroutine calc_taudir(maxmx,maxmy,meqn,mbc,mx,my,xlower,ylower,dx,dy,q,maux,aux
             detadyBL = (EtaL-EtaBL)/dy
 
             if (detadyTL*detadyBL.gt.0.0) then
-               detadyL = min(abs(detadyTL),abs(detadyBL))*sign(1.0,etaTL-etaBL)
+               detadyL = min(abs(detadyTL),abs(detadyBL))*sign(1.d0,etaTL-etaBL)
             else
                detadyL = 0.0
             endif
@@ -488,14 +488,14 @@ subroutine calc_taudir(maxmx,maxmy,meqn,mbc,mx,my,xlower,ylower,dx,dy,q,maux,aux
             detadyBR = (EtaR-EtaBR)/dy
 
             if (detadyTR*detadyBR.gt.0.0) then
-               detadyR = min(abs(detadyTR),abs(detadyBR))*sign(1.0,etaTR-etaBR)
+               detadyR = min(abs(detadyTR),abs(detadyBR))*sign(1.d0,etaTR-etaBR)
             else
                detadyR = 0.0
             endif
 
             !---------minmod deta/dy--------------------------
             if (detadyR*detadyL.gt.0.0) then
-               detady = min(abs(detadyR),abs(detadyL))*sign(1.0,detadyR)
+               detady = min(abs(detadyR),abs(detadyL))*sign(1.d0,detadyR)
             else
                detady = 0.0
             endif
@@ -505,9 +505,9 @@ subroutine calc_taudir(maxmx,maxmy,meqn,mbc,mx,my,xlower,ylower,dx,dy,q,maux,aux
             if (abs(detady)>0.0) then
                aux(i,j,i_taudir_x) = abs(detadx)/sqrt(detadx**2 + detady**2)
             elseif (detadx>0.0) then
-               aux(i,j,i_taudir_x) = 1.0
+               aux(i,j,i_taudir_x) = 1.d0
             else
-               aux(i,j,i_taudir_x) = 1.0
+               aux(i,j,i_taudir_x) = 1.d0
             endif
          enddo
          aux(i,my+mbc,i_taudir_x) = aux(i,my+mbc-1,i_taudir_x)
@@ -520,7 +520,7 @@ subroutine calc_taudir(maxmx,maxmy,meqn,mbc,mx,my,xlower,ylower,dx,dy,q,maux,aux
             hR = q(i,j,1)
             hL = q(i,j-1,1)
             if ((hL<=dry_tol).and.(hR<=dry_tol)) then
-               aux(i,j,i_taudir_y) = 1.0
+               aux(i,j,i_taudir_y) = 1.d0
                cycle
             endif
 
@@ -530,7 +530,7 @@ subroutine calc_taudir(maxmx,maxmy,meqn,mbc,mx,my,xlower,ylower,dx,dy,q,maux,aux
             hvR = q(i,j,3)
 
             if ((huL**2+huR**2)>0.0) then
-               aux(i,j,i_taudir_y) = 1.0
+               aux(i,j,i_taudir_y) = 1.d0
                cycle
             endif
 
@@ -589,7 +589,7 @@ subroutine calc_taudir(maxmx,maxmy,meqn,mbc,mx,my,xlower,ylower,dx,dy,q,maux,aux
             detadxBL = (EtaL-EtaBL)/dx -tan(theta)
 
             if (detadxTL*detadxBL.gt.0.0) then
-               detadxL = min(abs(detadxTL),abs(detadxBL))*sign(1.0,etaTL-etaBL)
+               detadxL = min(abs(detadxTL),abs(detadxBL))*sign(1.d0,etaTL-etaBL)
             else
                detadxL = 0.0
             endif
@@ -610,14 +610,14 @@ subroutine calc_taudir(maxmx,maxmy,meqn,mbc,mx,my,xlower,ylower,dx,dy,q,maux,aux
             detadxBR = (EtaR-EtaBR)/dx - tan(theta)
 
             if (detadxTR*detadxBR.gt.0.0) then
-               detadxR = min(abs(detadxTR),abs(detadxBR))*sign(1.0,etaTR-etaBR)
+               detadxR = min(abs(detadxTR),abs(detadxBR))*sign(1.d0,etaTR-etaBR)
             else
                detadxR = 0.0
             endif
 
             !---------minmod deta/dy--------------------------
             if (detadxR*detadxL.gt.0.0) then
-               detadx = min(abs(detadxR),abs(detadxL))*sign(1.0,detadxR)
+               detadx = min(abs(detadxR),abs(detadxL))*sign(1.d0,detadxR)
             else
                detadx = 0.0
             endif
@@ -627,7 +627,7 @@ subroutine calc_taudir(maxmx,maxmy,meqn,mbc,mx,my,xlower,ylower,dx,dy,q,maux,aux
             if (abs(detadx)>0) then
                aux(i,j,i_taudir_y) = abs(detady)/sqrt(detady**2 + detadx**2)
             else
-               aux(i,j,i_taudir_y) = 1.0
+               aux(i,j,i_taudir_y) = 1.d0
             endif
 
          enddo
